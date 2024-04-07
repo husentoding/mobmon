@@ -31,3 +31,25 @@ example:
     responseBody: |
       {}
     responseCode: 204
+  UpdateTransaction:
+    description: update existing trx for user
+    requestHeader:
+      Authorization: Bearer << idToken here >>
+      X-Signature: a3c266dc09efc30234c8eb2c1d13c240cfe27e879bcd536268f85afd41945f8f
+      User-Agent: FinanceApp/1.0.0 (Samsung-xxxx, Android 1.0)
+    requestBody: |
+      {
+        "resourcePath": "transaction/{id of the trx that needs to be updated}",
+        "data": {
+          "id": 1,
+          "amount": 50000,
+          "name": "bayar pulsa",
+          "date": "2024-04-07 10:00:00+07",
+          "category": 1,
+          "wallet": 2
+        }
+      }
+    responseBody: |
+      {}
+    responseCode: 204
+

@@ -145,12 +145,24 @@ paths:
                       example: "2.000000"
                 resourcePath:
                   type: string
-                  example: transaction
+                  example: transaction/{id of the trx that needs to be updated}
                 
       responses:
 
         '204':
           description: InsertTransaction
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  {}
+                  
+          
+  
+
+        '204':
+          description: UpdateTransaction
           content:
             application/json:
               schema:
