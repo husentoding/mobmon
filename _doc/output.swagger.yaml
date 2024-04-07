@@ -50,7 +50,7 @@ paths:
                 
       responses:
 
-        '409':
+        'ForceUpdate - 409':
           description: ForceUpdate
           content:
             application/json:
@@ -73,7 +73,7 @@ paths:
           
   
 
-        '200':
+        'LoginSuccess - 200':
           description: LoginSuccess
           content:
             application/json:
@@ -149,7 +149,7 @@ paths:
                 
       responses:
 
-        '204':
+        'InsertTransaction - 204':
           description: InsertTransaction
           content:
             application/json:
@@ -161,7 +161,7 @@ paths:
           
   
 
-        '204':
+        'UpdateTransaction - 204':
           description: UpdateTransaction
           content:
             application/json:

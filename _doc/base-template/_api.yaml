@@ -23,7 +23,7 @@
 {{ bodyFromExample .example | indent 16 }}
       responses:
 {{ range $key, $val := .example }}
-        '{{ $val.responseCode }}':
+        '{{ $key }} - {{ $val.responseCode }}':
           description: {{ $key }}
           content:
             application/json:
