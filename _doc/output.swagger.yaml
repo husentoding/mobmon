@@ -11,14 +11,18 @@ info:
 
 tags:
   
+- name: Postlogin
+  description: Collection for all API after login
+    
+  
 - name: Prelogin
-  description: Collection for all API before home page
+  description: Collection for all API before login
     
   
 
 
 paths:
-  identity/v1/user/login:
+  /identity/v1/user/login:
     post:
       tags:
         - Prelogin
@@ -46,6 +50,29 @@ paths:
                 
       responses:
 
+        '409':
+          description: ForceUpdate
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: CLIENT_UPDATE_REQUIRED
+                      msg:
+                        type: string
+                        example: client app version too old
+                  status:
+                    type: string
+                    example: failed
+                  
+          
+  
+
         '200':
           description: LoginSuccess
           content:
@@ -65,6 +92,71 @@ paths:
                       name:
                         type: string
                         example: Totoro
+                  
+          
+  
+
+  /resource/v1/upsert:
+    post:
+      tags:
+        - Postlogin
+      summary: endpoint to insert or update data resource
+      description: generic implementation of data insertion and update, can be used for data management such as transaction, wallet etc
+      parameters:
+        
+        - in: header
+          name: User-Agent
+          schema:
+            type: string
+          required: true
+          description: identifies client's agent made to create the request
+          example: FinanceApp/1.0.0 (Samsung-xxxx, Android 1.0)
+        
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    amount:
+                      type: number
+                      format: float
+                      example: "50000.000000"
+                    category:
+                      type: number
+                      format: float
+                      example: "1.000000"
+                    date:
+                      type: string
+                      example: 2024-04-07 10:00:00+07
+                    id:
+                      type: number
+                      format: float
+                      example: "1.000000"
+                    name:
+                      type: string
+                      example: bayar pulsa
+                    wallet:
+                      type: number
+                      format: float
+                      example: "2.000000"
+                resourcePath:
+                  type: string
+                  example: transaction
+                
+      responses:
+
+        '204':
+          description: InsertTransaction
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  {}
                   
           
   

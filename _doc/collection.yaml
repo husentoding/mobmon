@@ -3,5 +3,7 @@ description: mono repo for all mobile apps backend handling, written to be gener
 owner: github.com/husentoding
 version: 0.1.0
 subCollections:
+  Postlogin:
+      description: Collection for all API after login
   Prelogin:
-      description: Collection for all API before home page
+    description: Collection for all API before login

@@ -1,4 +1,4 @@
-path: identity/v1/user/login
+path: /identity/v1/user/login
 method: post
 subCollection: Prelogin
 summary: login and register endpoint
@@ -28,3 +28,21 @@ example:
         }
       }
     responseCode: 200
+  ForceUpdate:
+    description: login failed, client is required to be updated before proceed
+    requestHeader:
+      X-Signature: a3c266dc09efc30234c8eb2c1d13c240cfe27e879bcd536268f85afd41945f8f
+      User-Agent: FinanceApp/1.0.0 (Samsung-xxxx, Android 1.0)
+    requestBody: |
+      {
+        "idToken": "id token provided by Google/Apple"
+      }
+    responseBody: |
+      {
+        "status": "failed",
+        "error": {
+          "code": "CLIENT_UPDATE_REQUIRED",
+          "msg": "client app version too old"
+        }
+      }
+    responseCode: 409
