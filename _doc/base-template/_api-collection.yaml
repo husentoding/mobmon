@@ -1,0 +1,24 @@
+# base template for api collection that has same context
+# e.g identity service collection contains login api, signup api, etc...
+openapi: 3.0.3
+info:
+  title: {{ .title }}
+  description: {{ .description }}
+  contact:
+    name: {{ .owner }}
+  version: {{ .version }}
+
+{{ if .subCollections }}
+tags:
+  {{ range $key, $val := .subCollections }}
+- name: {{ $key }}
+  description: {{ $val.description }}
+    {{ if $val.externalDoc }}
+  externalDocs:
+    description: {{ $val.externalDoc.description }}
+    url: {{ $val.externalDoc.url }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+paths:

@@ -1,0 +1,43 @@
+  {{ .path }}:
+    {{ .method }}:
+      tags:
+        - {{ .subCollection }}
+      summary: {{ .summary }}
+      description: {{ .description }}
+      parameters:
+        {{ range $key, $val := .requestHeaders }}
+        - in: header
+          name: {{ $key }}
+          schema:
+            type: {{ $val.type }}
+          required: {{ $val.required }}
+          description: {{ $val.description }}
+          example: {{ $val.example }}
+        {{ end }}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+{{ bodyFromExample .example | indent 16 }}
+      responses:
+{{ range $key, $val := .example }}
+        '{{ $val.responseCode }}':
+          description: {{ $key }}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+{{ responseBody $val | indent 18 }}
+          {{ if $val.responseHeader }}headers: {{end}}
+  {{ range $keyHeader, $valHeader := $val.responseHeader }}
+            {{ $keyHeader }}:
+              schema:
+                type: {{ $valHeader.type }}
+                example: {{ $valHeader.example }}
+              required: {{ $valHeader.required }}
+              description: {{ $valHeader.description }}
+  {{ end }}
+{{ end }}

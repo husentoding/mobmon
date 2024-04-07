@@ -1,0 +1,30 @@
+path: identity/v1/user/login
+method: post
+subCollection: Prelogin
+summary: login and register endpoint
+description: given the id_token from the identity provider, this endpoint will verify that and do login/register the user
+requestHeaders:
+  User-Agent:
+    type: string
+    required: true
+    description: identifies client's agent made to create the request
+    example: FinanceApp/1.0.0 (Samsung-xxxx, Android 1.0)
+example:
+  LoginSuccess:
+    description: login success case
+    requestHeader:
+        X-Signature: a3c266dc09efc30234c8eb2c1d13c240cfe27e879bcd536268f85afd41945f8f
+        User-Agent: FinanceApp/1.0.0 (Samsung-xxxx, Android 1.0)
+    requestBody: |
+        {
+          "idToken": "id token provided by Google/Apple"
+        }
+    responseBody: |
+      {
+        "status": "success",
+        "user": {
+          "name": "Totoro",
+          "email": "totoro@ghibli.jp"
+        }
+      }
+    responseCode: 200

@@ -1,0 +1,7 @@
+title: Mobmon
+description: mono repo for all mobile apps backend handling, written to be generic enough for most apps usage
+owner: github.com/husentoding
+version: 0.1.0
+subCollections:
+  Prelogin:
+      description: Collection for all API before home page

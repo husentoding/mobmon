@@ -1,0 +1,71 @@
+# base template for api collection that has same context
+# e.g identity service collection contains login api, signup api, etc...
+openapi: 3.0.3
+info:
+  title: Mobmon
+  description: mono repo for all mobile apps backend handling, written to be generic enough for most apps usage
+  contact:
+    name: github.com/husentoding
+  version: 0.1.0
+
+
+tags:
+  
+- name: Prelogin
+  description: Collection for all API before home page
+    
+  
+
+
+paths:
+  identity/v1/user/login:
+    post:
+      tags:
+        - Prelogin
+      summary: login and register endpoint
+      description: given the id_token from the identity provider, this endpoint will verify that and do login/register the user
+      parameters:
+        
+        - in: header
+          name: User-Agent
+          schema:
+            type: string
+          required: true
+          description: identifies client's agent made to create the request
+          example: FinanceApp/1.0.0 (Samsung-xxxx, Android 1.0)
+        
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                idToken:
+                  type: string
+                  example: id token provided by Google/Apple
+                
+      responses:
+
+        '200':
+          description: LoginSuccess
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  user:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                        example: totoro@ghibli.jp
+                      name:
+                        type: string
+                        example: Totoro
+                  
+          
+  
+
